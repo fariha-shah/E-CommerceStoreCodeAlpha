@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - ShopEasy</title>
+    <link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/auth.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+      <link rel="stylesheet" href="css/responsive.css" />
+  </head>
+  <body>
+    <!-- TOP BAR -->
+    <div class="top-bar">
+      Customer Service: (+92) 321-000-0000 &nbsp;|&nbsp; Free shipping on orders over $50!
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+      <div class="nav-brand">
+        <a href="index.html"><i class="fas fa-spa"></i> Shop<span>Easy</span></a>
+      </div>
+      <div class="nav-search">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="Search products..." onkeydown="if(event.key==='Enter') window.location.href='index.html?search='+encodeURIComponent(this.value)"/>
+      </div>
+      <div class="nav-icons">
+        <a href="wishlist.html" title="Wishlist" style="position: relative">
+          <i class="fas fa-heart"></i>
+          <span class="cart-count" id="wishCount">0</span>
+        </a>
+        <a href="login.html" title="Login" id="navLoginBtn"><i class="fas fa-user"></i></a>
+        <a href="cart.html" title="Cart" style="position: relative">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="cart-count" id="cartCount">0</span>
+        </a>
+      </div>
+    </nav>
+
+    <!-- BREADCRUMB -->
+    <div class="breadcrumb">
+      <div class="container">
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+        <span> / </span>
+        <span>Login</span>
+      </div>
+    </div>
+
+    <!-- AUTH SECTION -->
+    <section class="auth-section">
+      <div class="auth-wrapper">
+        <!-- LEFT SIDE -->
+        <div class="auth-left">
+          <div class="auth-left-content">
+            <i class="fas fa-spa auth-left-icon"></i>
+            <h2>Welcome Back!</h2>
+            <p>
+              Login to access your orders, track deliveries, save favorite items, and view exclusive member deals.
+            </p>
+            <ul class="auth-perks">
+              <li><i class="fas fa-check-circle"></i> View real-time order tracking</li>
+              <li><i class="fas fa-check-circle"></i> Manage wishlist & saved items</li>
+              <li><i class="fas fa-check-circle"></i> Faster checkout & saved addresses</li>
+              <li><i class="fas fa-check-circle"></i> Administrator control console</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- RIGHT SIDE: Login Form -->
+        <div class="auth-right">
+          <div class="auth-form-wrap">
+            <h1>Welcome Back</h1>
+            <p class="auth-subtitle">
+              Don't have an account? <a href="register.html">Register here</a>
+            </p>
+
+            <!-- Error / Success Message -->
+            <div class="auth-alert error" id="errorAlert"></div>
+            <div class="auth-alert success" id="successAlert"></div>
+
+            <!-- FORM -->
+            <div class="auth-form">
+              <div class="form-group">
+                <label><i class="fas fa-envelope"></i> Email Address</label>
+                <input
+                  type="email"
+                  id="loginEmail"
+                  placeholder="Enter your email"
+                />
+              </div>
+
+              <div class="form-group">
+                <label><i class="fas fa-lock"></i> Password</label>
+                <div class="input-icon-wrap">
+                  <input
+                    type="password"
+                    id="loginPassword"
+                    placeholder="Enter your password"
+                    onkeydown="if(event.key==='Enter') loginUser()"
+                  />
+                  <i
+                    class="fas fa-eye toggle-pass"
+                    onclick="togglePassword('loginPassword', this)"
+                  ></i>
+                </div>
+              </div>
+
+              <div class="form-row-space">
+                <div class="form-check">
+                  <input type="checkbox" id="rememberMe" checked />
+                  <label for="rememberMe">Remember me</label>
+                </div>
+                <a href="javascript:alert('Password reset link has been sent to your email.')" class="forgot-link">Forgot password?</a>
+              </div>
+
+              <button class="btn-auth" id="loginBtn" onclick="loginUser()">
+                <span id="loginBtnText"><i class="fas fa-sign-in-alt"></i> Login</span>
+                <span id="loginBtnLoader" style="display: none"><i class="fas fa-spinner fa-spin"></i> Logging in...</span>
+              </button>
+            </div>
+
+            <div class="auth-divider"><span>or 1-click test credentials</span></div>
+
+            <!-- QUICK TEST CREDENTIALS -->
+            <div style="background: #faf4f5; border: 1px dashed #e0c8ce; border-radius: 8px; padding: 12px; margin-bottom: 15px; font-size: 12px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <span>👑 <strong>Admin:</strong> admin@shopeasy.com</span>
+                <button type="button" onclick="fillTestCreds('admin@shopeasy.com', 'admin123')" style="background: #8b1a2f; color: white; border: none; padding: 4px 10px; border-radius: 4px; cursor: pointer; font-size: 11px; font-weight: 600;">Fill Admin</button>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span>👤 <strong>Customer:</strong> test@example.com</span>
+                <button type="button" onclick="fillTestCreds('test@example.com', 'test123456')" style="background: #555; color: white; border: none; padding: 4px 10px; border-radius: 4px; cursor: pointer; font-size: 11px; font-weight: 600;">Fill Customer</button>
+              </div>
+            </div>
+
+            <p class="auth-switch">
+              New to ShopEasy? <a href="register.html">Create an account →</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <p>
+        © 2024 ShopEasy. All rights reserved. | CodeAlpha Full Stack
+      </p>
+    </footer>
+
+    <div class="toast" id="toast"></div>
+    <script src="js/auth-guard.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/auth.js"></script>
+  </body>
+</html>

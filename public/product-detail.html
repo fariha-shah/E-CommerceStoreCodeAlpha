@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Detail - ShopEasy</title>
+    <link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/product-detail.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+      <link rel="stylesheet" href="css/responsive.css" />
+  </head>
+  <body>
+    <!-- TOP BAR -->
+    <div class="top-bar">
+      Customer Service: (+92) 321-000-0000 &nbsp;|&nbsp; Free shipping on orders over $50!
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+      <div class="nav-brand">
+        <a href="index.html"><i class="fas fa-spa"></i> Shop<span>Easy</span></a>
+      </div>
+      <div class="nav-search">
+        <i class="fas fa-search"></i>
+        <input type="text" id="searchInput" placeholder="Search products..." onkeydown="if(event.key==='Enter') window.location.href='index.html?search='+encodeURIComponent(this.value)"/>
+      </div>
+      <div class="nav-icons">
+        <a href="wishlist.html" title="Wishlist" style="position: relative">
+          <i class="fas fa-heart"></i>
+          <span class="cart-count" id="wishCount">0</span>
+        </a>
+        <a href="login.html" title="Login" id="navLoginBtn"><i class="fas fa-user"></i></a>
+        <a href="cart.html" title="Cart" style="position: relative">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="cart-count" id="cartCount">0</span>
+        </a>
+      </div>
+    </nav>
+
+    <!-- BREADCRUMB -->
+    <div class="breadcrumb">
+      <div class="container">
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+        <span> / </span>
+        <a href="index.html">Products</a>
+        <span> / </span>
+        <span id="breadcrumbName">Product Detail</span>
+      </div>
+    </div>
+
+    <!-- PRODUCT DETAIL SECTION -->
+    <section class="detail-section">
+      <div class="container">
+        <div class="detail-wrapper">
+          <!-- LEFT: Product Images -->
+          <div class="detail-images">
+            <div class="main-image-wrap">
+              <img id="mainImage" src="" alt="Product" onerror="this.src='https://via.placeholder.com/500?text=Product+Image'"/>
+              <span class="detail-badge" id="detailBadge"></span>
+            </div>
+            <div class="thumb-row" id="thumbRow">
+              <!-- Thumbnails loaded by JS -->
+            </div>
+          </div>
+
+          <!-- RIGHT: Product Info -->
+          <div class="detail-info">
+            <span class="detail-category" id="detailCategory"></span>
+            <h1 class="detail-title" id="detailName"></h1>
+
+            <div class="detail-stars" id="detailStars"></div>
+
+            <div class="detail-price-row">
+              <span class="detail-price" id="detailPrice"></span>
+              <span class="detail-old-price" id="detailOldPrice"></span>
+              <span class="detail-discount-badge" id="detailDiscount"></span>
+            </div>
+
+            <!-- Stock indicator -->
+            <div id="detailStock" style="font-size: 13px; font-weight: 600; margin: 12px 0;"></div>
+
+            <p class="detail-description" id="detailDescription"></p>
+
+            <div class="detail-divider"></div>
+
+            <!-- Quantity Selector -->
+            <div class="quantity-section">
+              <label>Quantity:</label>
+              <div class="qty-control">
+                <button type="button" onclick="changeQty(-1)">−</button>
+                <span id="qtyDisplay">1</span>
+                <button type="button" onclick="changeQty(1)">+</button>
+              </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="detail-actions">
+              <button class="btn-detail-cart" id="btnAddToCartDetail" onclick="addToCartDetail()">
+                <i class="fas fa-shopping-cart"></i> Add to Cart
+              </button>
+              <button
+                class="btn-detail-wish"
+                id="wishBtn"
+                onclick="toggleWishlistDetail()"
+              >
+                <i class="fas fa-heart"></i> Wishlist
+              </button>
+            </div>
+
+            <!-- Meta Info -->
+            <div class="detail-meta">
+              <div class="meta-row">
+                <i class="fas fa-truck"></i>
+                <span>Free delivery on orders over <strong>$50</strong></span>
+              </div>
+              <div class="meta-row">
+                <i class="fas fa-undo"></i>
+                <span>Easy <strong>30-day</strong> returns</span>
+              </div>
+              <div class="meta-row">
+                <i class="fas fa-shield-alt"></i>
+                <span><strong>Secure</strong> checkout guaranteed</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REVIEWS & RATINGS SECTION -->
+    <section class="reviews-section" style="padding: 45px 0; background: #fff; border-top: 1px solid #f0e6e8; border-bottom: 1px solid #f0e6e8;">
+      <div class="container">
+        <div class="section-header" style="text-align: left; margin-bottom: 25px;">
+          <h2 style="font-size: 22px; color: #8b1a2f;"><i class="fas fa-comments"></i> Customer Reviews & Ratings</h2>
+          <div class="underline" style="margin: 8px 0 0 0;"></div>
+        </div>
+
+        <div class="reviews-grid">
+          <!-- Left: List of reviews -->
+          <div>
+            <h3 style="font-size: 16px; margin-bottom: 15px; color: #333;">Verified Customer Feedback</h3>
+            <div id="reviewsList" style="display: flex; flex-direction: column; gap: 14px;">
+              <p style="color: #888; font-size: 14px;">Loading customer reviews...</p>
+            </div>
+          </div>
+
+          <!-- Right: Submit a review form -->
+          <div style="background: #faf4f5; padding: 25px; border-radius: 12px; border: 1px solid #ecdfe2; height: fit-content;">
+            <h3 style="font-size: 17px; margin-bottom: 15px; color: #8b1a2f;"><i class="fas fa-star-half-alt"></i> Rate & Review this Product</h3>
+            <div id="reviewFormWrap">
+              <div style="margin-bottom: 15px;">
+                <label style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 5px; color: #444;">Your Rating:</label>
+                <div id="starPicker" style="font-size: 26px; color: #f1c40f; cursor: pointer; user-select: none;">
+                  <span onclick="setRating(1)">★</span>
+                  <span onclick="setRating(2)">★</span>
+                  <span onclick="setRating(3)">★</span>
+                  <span onclick="setRating(4)">★</span>
+                  <span onclick="setRating(5)">★</span>
+                </div>
+                <small id="ratingLabel" style="color: #666; font-size: 12px;">5 Stars - Excellent</small>
+              </div>
+
+              <div style="margin-bottom: 15px;">
+                <label style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 5px; color: #444;">Your Comment:</label>
+                <textarea id="reviewComment" rows="3" placeholder="Tell us what you liked or how we can improve..." style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-family: inherit; font-size: 13px; outline: none;"></textarea>
+              </div>
+
+              <button type="button" onclick="submitReview()" style="background: #8b1a2f; color: white; border: none; padding: 10px 22px; border-radius: 8px; font-weight: 600; font-size: 14px; cursor: pointer;">
+                <i class="fas fa-paper-plane"></i> Submit Feedback
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RELATED PRODUCTS -->
+    <section class="related-section">
+      <div class="container">
+        <div class="section-header">
+          <h2>Related Products</h2>
+          <div class="underline"></div>
+        </div>
+        <div class="products-grid" id="relatedGrid"></div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <p>
+        © 2024 ShopEasy. All rights reserved. | Built with ❤️ during CodeAlpha Internship
+      </p>
+    </footer>
+
+    <div class="toast" id="toast"></div>
+    <script src="js/auth-guard.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/wishlist.js"></script>
+    <script src="js/product-detail.js"></script>
+  </body>
+</html>

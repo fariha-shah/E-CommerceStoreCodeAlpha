@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Orders - ShopEasy</title>
+    <link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/orders.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+      <link rel="stylesheet" href="css/responsive.css" />
+  </head>
+  <body>
+    <!-- TOP BAR -->
+    <div class="top-bar">
+      Customer Service: (+92) 321-000-0000 &nbsp;|&nbsp; Free shipping on orders over $50!
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+      <div class="nav-brand">
+        <a href="index.html"><i class="fas fa-spa"></i> Shop<span>Easy</span></a>
+      </div>
+      <div class="nav-search">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="Search products..." onkeydown="if(event.key==='Enter') window.location.href='index.html?search='+encodeURIComponent(this.value)"/>
+      </div>
+      <div class="nav-icons">
+        <a href="wishlist.html" title="Wishlist" style="position: relative">
+          <i class="fas fa-heart"></i>
+          <span class="cart-count" id="wishCount">0</span>
+        </a>
+        <a href="login.html" title="Login" id="navLoginBtn"><i class="fas fa-user"></i></a>
+        <a href="cart.html" title="Cart" style="position: relative">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="cart-count" id="cartCount">0</span>
+        </a>
+      </div>
+    </nav>
+
+    <!-- BREADCRUMB -->
+    <div class="breadcrumb">
+      <div class="container">
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+        <span> / </span>
+        <span>My Orders & Shipment Tracking</span>
+      </div>
+    </div>
+
+    <!-- ORDERS SECTION -->
+    <section class="orders-section">
+      <div class="container">
+        <div class="orders-header">
+          <h1 class="orders-title"><i class="fas fa-box-open"></i> My Orders & Tracking</h1>
+          <div class="orders-filter-row">
+            <label style="font-size: 13px; font-weight: 600; color: #555;">Filter:</label>
+            <select id="statusFilter" onchange="filterOrdersByStatus()">
+              <option value="all">All Orders</option>
+              <option value="Pending">Pending</option>
+              <option value="Processing">Processing</option>
+              <option value="Shipped">Shipped</option>
+              <option value="Delivered">Delivered</option>
+              <option value="Cancelled">Cancelled</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Orders Container -->
+        <div id="ordersContainer">
+          <!-- Dynamically populated by orders.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <p>
+        © 2024 ShopEasy. All rights reserved. | Built with ❤️ during CodeAlpha Internship
+      </p>
+    </footer>
+
+    <div class="toast" id="toast"></div>
+    <script src="js/auth-guard.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/wishlist.js"></script>
+    <script src="js/orders.js"></script>
+  </body>
+</html>

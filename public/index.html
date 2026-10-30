@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ShopEasy - Modern Online Department Store</title>
+    <link rel="stylesheet" href="css/style.css" />
+<link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+      <link rel="stylesheet" href="css/responsive.css" />
+  </head>
+  <body>
+    <!-- TOP BAR -->
+    <div class="top-bar">
+      Customer Service: (+92) 321-000-0000 &nbsp;|&nbsp; Free shipping on orders over $50! Use code <strong>SAVE10</strong>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+      <div class="nav-brand">
+        <a href="index.html"><i class="fas fa-spa"></i> Shop<span>Easy</span></a>
+      </div>
+      <div class="nav-search">
+        <i class="fas fa-search"></i>
+        <input type="text" id="searchInput" placeholder="Search products, brands, categories..." />
+      </div>
+      <div class="nav-icons">
+        <a href="wishlist.html" title="Wishlist" style="position: relative">
+          <i class="fas fa-heart"></i>
+          <span class="cart-count" id="wishCount">0</span>
+        </a>
+        <a href="login.html" title="Login" id="navLoginBtn">
+          <i class="fas fa-user"></i>
+        </a>
+        <a href="cart.html" title="Cart" style="position: relative">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="cart-count" id="cartCount">0</span>
+        </a>
+      </div>
+    </nav>
+
+    <!-- CATEGORY NAV -->
+    <div class="cat-nav">
+      <a href="javascript:void(0)" class="active" data-cat="all" onclick="filterByCategory('all')">All Products</a>
+      <a href="javascript:void(0)" data-cat="electronics" onclick="filterByCategory('electronics')">Electronics</a>
+      <a href="javascript:void(0)" data-cat="clothing" onclick="filterByCategory('clothing')">Clothing</a>
+      <a href="javascript:void(0)" data-cat="books" onclick="filterByCategory('books')">Books</a>
+      <a href="javascript:void(0)" data-cat="home" onclick="filterByCategory('home')">Home & Kitchen</a>
+      <a href="javascript:void(0)" data-cat="beauty" onclick="filterByCategory('beauty')">Beauty</a>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-content">
+        <span class="sale-badge">Mega Sale Up To 30% Off</span>
+        <h1>Discover Premium Quality Products</h1>
+        <p>Explore exclusive seasonal collections across electronics, apparel, literature & home essentials.</p>
+        <a href="#products" class="btn-hero"><i class="fas fa-shopping-bag"></i> Shop Now</a>
+      </div>
+      <div class="hero-image">
+        <img
+          src="https://images.unsplash.com/photo-1607748862156-7c548e7e98f4?w=500"
+          alt="ShopEasy Lifestyle"
+        />
+      </div>
+    </section>
+
+    <!-- CATEGORY ICONS ROW -->
+    <section class="categories-row">
+      <div class="cat-icons-grid">
+        <div class="cat-icon-item" onclick="filterByCategory('electronics')">
+          <div class="cat-icon-circle">
+            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=100" alt="Electronics" />
+          </div>
+          <span>Electronics</span>
+        </div>
+        <div class="cat-icon-item" onclick="filterByCategory('clothing')">
+          <div class="cat-icon-circle">
+            <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=100" alt="Clothing" />
+          </div>
+          <span>Clothing</span>
+        </div>
+        <div class="cat-icon-item" onclick="filterByCategory('books')">
+          <div class="cat-icon-circle">
+            <img src="https://images.unsplash.com/photo-1532012197267-da84d127e765?w=100" alt="Books" />
+          </div>
+          <span>Books</span>
+        </div>
+        <div class="cat-icon-item" onclick="filterByCategory('home')">
+          <div class="cat-icon-circle">
+            <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=100" alt="Home" />
+          </div>
+          <span>Home & Kitchen</span>
+        </div>
+        <div class="cat-icon-item" onclick="filterByCategory('beauty')">
+          <div class="cat-icon-circle">
+            <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=100" alt="Beauty" />
+          </div>
+          <span>Beauty</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROMO BANNERS -->
+    <section class="promo-section">
+      <div class="promo-card pink">
+        <div class="promo-content">
+          <p class="discount">25% Discount</p>
+          <h3>Best Deals on Electronics</h3>
+          <a href="#products" class="btn-promo" onclick="filterByCategory('electronics')">Shop Deals</a>
+        </div>
+        <img
+          class="promo-img"
+          src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=200"
+          alt="Electronics Promo"
+        />
+      </div>
+      <div class="promo-card gold">
+        <div class="promo-content">
+          <p class="discount">30% Discount</p>
+          <h3>Trending Fashion & Apparel</h3>
+          <a href="#products" class="btn-promo" onclick="filterByCategory('clothing')">Explore Styles</a>
+        </div>
+        <img
+          class="promo-img"
+          src="https://images.unsplash.com/photo-1601333144130-8cbb312386b6?w=200"
+          alt="Clothing Promo"
+        />
+      </div>
+    </section>
+
+    <!-- PRODUCTS SECTION -->
+    <section class="products-section" id="products">
+      <div class="section-header">
+        <h2>Explore Trending Collections</h2>
+        <div class="underline"></div>
+        <div class="tabs">
+          <button class="tab-btn active" onclick="switchTab(this, 'all')">
+            All Products
+          </button>
+          <button class="tab-btn" onclick="switchTab(this, 'bestseller')">
+            Bestsellers
+          </button>
+          <button class="tab-btn" onclick="switchTab(this, 'special')">
+            Special Discounts
+          </button>
+        </div>
+      </div>
+
+      <!-- FILTER & SORT CONTROLS BAR -->
+      <div class="container">
+        <div class="products-filter-bar">
+          <div class="filter-left">
+            <span style="font-size: 13px; font-weight: 600; color: #555;"><i class="fas fa-sort-amount-down"></i> Sort By:</span>
+            <select class="filter-select" id="sortSelect">
+              <option value="default">Featured / Recommended</option>
+              <option value="price-low">Price: Low to High</option>
+              <option value="price-high">Price: High to Low</option>
+              <option value="rating">Highest Rated</option>
+              <option value="name">Alphabetical (A - Z)</option>
+            </select>
+          </div>
+
+          <div class="filter-right">
+            <span style="font-size: 13px; font-weight: 600; color: #555;"><i class="fas fa-filter"></i> Price Range:</span>
+            <div class="price-inputs">
+              <input type="number" id="minPrice" placeholder="Min $" class="price-input" min="0"/>
+              <span>–</span>
+              <input type="number" id="maxPrice" placeholder="Max $" class="price-input" min="0"/>
+              <button class="btn-filter-apply" onclick="fetchProducts()">Filter</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRODUCTS GRID -->
+      <div class="container">
+        <div class="products-grid" id="productsGrid"></div>
+      </div>
+    </section>
+
+    <!-- SERVICE HIGHLIGHTS / PERKS -->
+    <section class="services-section">
+      <div class="container services-grid">
+        <div>
+          <i class="fas fa-shipping-fast" style="font-size: 30px; color: #8b1a2f; margin-bottom: 10px;"></i>
+          <h4 style="font-size: 16px; margin-bottom: 5px;">Express Delivery</h4>
+          <p style="font-size: 13px; color: #777;">Free shipping on all orders over $50</p>
+        </div>
+        <div>
+          <i class="fas fa-shield-alt" style="font-size: 30px; color: #8b1a2f; margin-bottom: 10px;"></i>
+          <h4 style="font-size: 16px; margin-bottom: 5px;">Secure Payments</h4>
+          <p style="font-size: 13px; color: #777;">256-bit encrypted card & COD options</p>
+        </div>
+        <div>
+          <i class="fas fa-undo-alt" style="font-size: 30px; color: #8b1a2f; margin-bottom: 10px;"></i>
+          <h4 style="font-size: 16px; margin-bottom: 5px;">30-Day Returns</h4>
+          <p style="font-size: 13px; color: #777;">Hassle-free replacement guarantee</p>
+        </div>
+        <div>
+          <i class="fas fa-headset" style="font-size: 30px; color: #8b1a2f; margin-bottom: 10px;"></i>
+          <h4 style="font-size: 16px; margin-bottom: 5px;">Dedicated Support</h4>
+          <p style="font-size: 13px; color: #777;">24/7 customer care & order tracking</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <p>
+        © 2024 ShopEasy. All rights reserved. | CodeAlpha Full Stack Internship Task
+      </p>
+    </footer>
+
+    <div class="toast" id="toast"></div>
+
+    <script src="js/auth-guard.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/wishlist.js"></script>
+    <script src="js/products.js"></script>
+  </body>
+</html>

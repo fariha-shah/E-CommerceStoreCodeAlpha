@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Profile - ShopEasy</title>
+    <link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/profile.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+      <link rel="stylesheet" href="css/responsive.css" />
+  </head>
+  <body>
+    <!-- TOP BAR -->
+    <div class="top-bar">
+      Customer Service: (+92) 321-000-0000 &nbsp;|&nbsp; Free shipping on orders over $50!
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+      <div class="nav-brand">
+        <a href="index.html"><i class="fas fa-spa"></i> Shop<span>Easy</span></a>
+      </div>
+      <div class="nav-search">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="Search products..." onkeydown="if(event.key==='Enter') window.location.href='index.html?search='+encodeURIComponent(this.value)"/>
+      </div>
+      <div class="nav-icons">
+        <a href="wishlist.html" title="Wishlist" style="position: relative">
+          <i class="fas fa-heart"></i>
+          <span class="cart-count" id="wishCount">0</span>
+        </a>
+        <a href="login.html" title="Login" id="navLoginBtn"><i class="fas fa-user"></i></a>
+        <a href="cart.html" title="Cart" style="position: relative">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="cart-count" id="cartCount">0</span>
+        </a>
+      </div>
+    </nav>
+
+    <!-- BREADCRUMB -->
+    <div class="breadcrumb">
+      <div class="container">
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+        <span> / </span>
+        <span>My Account & Profile</span>
+      </div>
+    </div>
+
+    <!-- PROFILE SECTION -->
+    <section class="profile-section">
+      <div class="container">
+        <div class="profile-layout">
+          <!-- SIDEBAR -->
+          <div class="profile-sidebar">
+            <div class="profile-avatar-circle" id="avatarInitial">U</div>
+            <h3 class="profile-user-name" id="sidebarUserName">User Account</h3>
+            <p class="profile-user-email" id="sidebarUserEmail">user@example.com</p>
+
+            <ul class="profile-menu">
+              <li>
+                <a href="profile.html" class="active"><i class="fas fa-id-badge"></i> Account Settings</a>
+              </li>
+              <li>
+                <a href="orders.html"><i class="fas fa-box"></i> My Orders</a>
+              </li>
+              <li>
+                <a href="wishlist.html"><i class="fas fa-heart"></i> Wishlist</a>
+              </li>
+              <li id="sidebarAdminLink" style="display: none;">
+                <a href="admin.html" style="color: #8b1a2f; font-weight: bold;"><i class="fas fa-crown"></i> Admin Dashboard</a>
+              </li>
+              <li>
+                <a href="javascript:void(0)" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- MAIN CONTENT -->
+          <div>
+            <!-- PROFILE DETAILS -->
+            <div class="profile-main-card" style="margin-bottom: 30px;">
+              <h2 class="profile-card-title">
+                <i class="fas fa-user-edit"></i> Personal Information & Shipping Address
+              </h2>
+              <form class="profile-form" onsubmit="saveProfile(event)">
+                <div class="profile-form-grid">
+                  <div>
+                    <label>Full Name</label>
+                    <input type="text" id="profName" required />
+                  </div>
+                  <div>
+                    <label>Email Address (Account ID)</label>
+                    <input type="email" id="profEmail" disabled />
+                  </div>
+                  <div>
+                    <label>Phone Number</label>
+                    <input type="tel" id="profPhone" placeholder="+92 300 0000000" />
+                  </div>
+                  <div>
+                    <label>Country</label>
+                    <input type="text" id="profCountry" value="Pakistan" />
+                  </div>
+                  <div class="form-group-full">
+                    <label>Street Address</label>
+                    <input type="text" id="profAddress" placeholder="House / Flat #, Street, Area" />
+                  </div>
+                  <div>
+                    <label>City</label>
+                    <input type="text" id="profCity" placeholder="City" />
+                  </div>
+                  <div>
+                    <label>Postal Code</label>
+                    <input type="text" id="profPostal" placeholder="75500" />
+                  </div>
+                </div>
+                <button type="submit" class="btn-save-profile" id="btnSaveProfile">
+                  <i class="fas fa-save"></i> Save Profile Details
+                </button>
+              </form>
+            </div>
+
+            <!-- SECURITY & CHANGE PASSWORD -->
+            <div class="profile-main-card">
+              <h2 class="profile-card-title">
+                <i class="fas fa-lock"></i> Security & Password
+              </h2>
+              <form class="profile-form" onsubmit="changePassword(event)">
+                <div class="profile-form-grid">
+                  <div class="form-group-full">
+                    <label>Current Password</label>
+                    <input type="password" id="currentPass" required placeholder="Enter existing password" />
+                  </div>
+                  <div>
+                    <label>New Password (min 6 characters)</label>
+                    <input type="password" id="newPass" required placeholder="Create new password" />
+                  </div>
+                  <div>
+                    <label>Confirm New Password</label>
+                    <input type="password" id="confirmNewPass" required placeholder="Confirm new password" />
+                  </div>
+                </div>
+                <button type="submit" class="btn-save-profile" style="background: #333;" id="btnChangePass">
+                  <i class="fas fa-key"></i> Update Password
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <p>
+        © 2024 ShopEasy. All rights reserved. | Built with ❤️ during CodeAlpha Internship
+      </p>
+    </footer>
+
+    <div class="toast" id="toast"></div>
+    <script src="js/auth-guard.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/wishlist.js"></script>
+    <script src="js/profile.js"></script>
+  </body>
+</html>

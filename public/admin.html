@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard - ShopEasy</title>
+    <link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/admin.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+      <link rel="stylesheet" href="css/responsive.css" />
+  </head>
+  <body>
+    <!-- TOP BAR -->
+    <div class="top-bar">
+      ShopEasy Central Administration Console &nbsp;|&nbsp; Logged in with Admin Privileges
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+      <div class="nav-brand">
+        <a href="index.html"><i class="fas fa-spa"></i> Shop<span>Easy</span></a>
+      </div>
+      <div class="admin-nav-title" style="font-weight: 600; color: #8b1a2f; display: flex; align-items: center; gap: 8px;">
+        <i class="fas fa-shield-alt"></i> Store Administration
+      </div>
+      <div class="nav-icons">
+        <a href="index.html" title="Visit Store" style="font-size: 14px; font-weight: 600; color: #555; display: flex; align-items: center; gap: 6px;">
+          <i class="fas fa-store"></i> <span>View Store</span>
+        </a>
+        <a href="login.html" id="navLoginBtn"><i class="fas fa-user"></i></a>
+      </div>
+    </nav>
+
+    <!-- ADMIN MAIN SECTION -->
+    <div class="admin-container">
+      <div class="admin-header">
+        <h1 class="admin-title">
+          <i class="fas fa-tachometer-alt"></i> Admin Dashboard
+          <span class="admin-tag">Master Admin</span>
+        </h1>
+        <div style="display: flex; gap: 10px;">
+          <button class="btn-primary-admin" onclick="openAddProductModal()">
+            <i class="fas fa-plus-circle"></i> Add New Product
+          </button>
+        </div>
+      </div>
+
+      <!-- TABS -->
+      <div class="admin-tabs">
+        <button class="admin-tab-btn active" onclick="switchAdminTab('overview', this)">
+          <i class="fas fa-chart-line"></i> Overview & Metrics
+        </button>
+        <button class="admin-tab-btn" onclick="switchAdminTab('products', this)">
+          <i class="fas fa-boxes"></i> Product Catalog
+        </button>
+        <button class="admin-tab-btn" onclick="switchAdminTab('orders', this)">
+          <i class="fas fa-shopping-bag"></i> Customer Orders
+        </button>
+        <button class="admin-tab-btn" onclick="switchAdminTab('users', this)">
+          <i class="fas fa-users"></i> Registered Users
+        </button>
+      </div>
+
+      <!-- TAB 1: OVERVIEW -->
+      <div id="tabOverview" class="admin-tab-content">
+        <!-- KPI Cards -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon revenue"><i class="fas fa-dollar-sign"></i></div>
+            <div class="stat-info">
+              <h4>Total Revenue</h4>
+              <div class="stat-value" id="kpiRevenue">$0.00</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon orders"><i class="fas fa-shopping-cart"></i></div>
+            <div class="stat-info">
+              <h4>Total Orders</h4>
+              <div class="stat-value" id="kpiOrders">0</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon products"><i class="fas fa-box-open"></i></div>
+            <div class="stat-info">
+              <h4>Total Products</h4>
+              <div class="stat-value" id="kpiProducts">0</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon users"><i class="fas fa-users"></i></div>
+            <div class="stat-info">
+              <h4>Total Customers</h4>
+              <div class="stat-value" id="kpiUsers">0</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Orders Card -->
+        <div class="admin-card">
+          <div class="card-top-bar">
+            <h3><i class="fas fa-clock"></i> Recent Orders</h3>
+            <button class="btn-secondary-admin" onclick="switchAdminTab('orders', document.querySelectorAll('.admin-tab-btn')[2])">
+              View All Orders →
+            </button>
+          </div>
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Customer</th>
+                  <th>Items</th>
+                  <th>Total</th>
+                  <th>Status</th>
+                  <th>Date</th>
+                </tr>
+              </thead>
+              <tbody id="recentOrdersTable">
+                <tr><td colspan="6" style="text-align:center; padding: 20px;">Loading orders...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 2: PRODUCTS MANAGEMENT -->
+      <div id="tabProducts" class="admin-tab-content" style="display: none;">
+        <div class="admin-card">
+          <div class="card-top-bar">
+            <h3><i class="fas fa-boxes"></i> All Products Inventory</h3>
+            <div style="display: flex; gap: 10px;">
+              <input type="text" id="adminProductSearch" placeholder="Search catalog..." style="padding: 8px 14px; border: 1px solid #ddd; border-radius: 8px; font-size: 13px;" oninput="filterAdminProducts()"/>
+              <button class="btn-primary-admin" onclick="openAddProductModal()">
+                <i class="fas fa-plus"></i> Add Product
+              </button>
+            </div>
+          </div>
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Image</th>
+                  <th>Name</th>
+                  <th>Category</th>
+                  <th>Price</th>
+                  <th>Old Price</th>
+                  <th>Stock</th>
+                  <th>Rating</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="adminProductsTable">
+                <tr><td colspan="8" style="text-align:center; padding: 20px;">Loading products...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 3: ORDERS MANAGEMENT -->
+      <div id="tabOrders" class="admin-tab-content" style="display: none;">
+        <div class="admin-card">
+          <div class="card-top-bar">
+            <h3><i class="fas fa-shopping-bag"></i> Customer Orders Management</h3>
+            <div>
+              <select id="adminOrderStatusFilter" onchange="filterAdminOrders()" style="padding: 8px 14px; border: 1px solid #ddd; border-radius: 8px; font-size: 13px;">
+                <option value="all">All Statuses</option>
+                <option value="Pending">Pending</option>
+                <option value="Processing">Processing</option>
+                <option value="Shipped">Shipped</option>
+                <option value="Delivered">Delivered</option>
+                <option value="Cancelled">Cancelled</option>
+              </select>
+            </div>
+          </div>
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Customer</th>
+                  <th>Contact</th>
+                  <th>Items</th>
+                  <th>Total</th>
+                  <th>Payment</th>
+                  <th>Status</th>
+                  <th>Update Status</th>
+                </tr>
+              </thead>
+              <tbody id="adminOrdersTable">
+                <tr><td colspan="8" style="text-align:center; padding: 20px;">Loading orders...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 4: USERS MANAGEMENT -->
+      <div id="tabUsers" class="admin-tab-content" style="display: none;">
+        <div class="admin-card">
+          <div class="card-top-bar">
+            <h3><i class="fas fa-users"></i> Registered Customer Directory</h3>
+          </div>
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>Role</th>
+                  <th>City</th>
+                  <th>Registered Date</th>
+                </tr>
+              </thead>
+              <tbody id="adminUsersTable">
+                <tr><td colspan="6" style="text-align:center; padding: 20px;">Loading users...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRODUCT ADD / EDIT MODAL -->
+    <div class="admin-modal-overlay" id="productModal">
+      <div class="admin-modal">
+        <div class="modal-head">
+          <h3 id="modalTitle"><i class="fas fa-box"></i> Add New Product</h3>
+          <button class="modal-close" onclick="closeProductModal()">&times;</button>
+        </div>
+        <form id="productForm" onsubmit="saveProduct(event)">
+          <input type="hidden" id="prodEditId"/>
+          <div class="modal-body">
+            <div class="form-grid-2">
+              <div class="form-group" style="margin-bottom: 12px;">
+                <label style="display:block; font-size:13px; font-weight:600; margin-bottom:5px;">Product Name *</label>
+                <input type="text" id="prodName" required style="width:100%; padding:9px; border:1px solid #ddd; border-radius:6px; font-size:13px;"/>
+              </div>
+              <div class="form-group" style="margin-bottom: 12px;">
+                <label style="display:block; font-size:13px; font-weight:600; margin-bottom:5px;">Category *</label>
+                <select id="prodCategory" required style="width:100%; padding:9px; border:1px solid #ddd; border-radius:6px; font-size:13px;">
+                  <option value="electronics">Electronics</option>
+                  <option value="clothing">Clothing</option>
+                  <option value="books">Books</option>
+                  <option value="home">Home & Kitchen</option>
+                  <option value="beauty">Beauty</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-grid-2">
+              <div class="form-group" style="margin-bottom: 12px;">
+                <label style="display:block; font-size:13px; font-weight:600; margin-bottom:5px;">Price ($) *</label>
+                <input type="number" step="0.01" id="prodPrice" required style="width:100%; padding:9px; border:1px solid #ddd; border-radius:6px; font-size:13px;"/>
+              </div>
+              <div class="form-group" style="margin-bottom: 12px;">
+                <label style="display:block; font-size:13px; font-weight:600; margin-bottom:5px;">Old Price ($)</label>
+                <input type="number" step="0.01" id="prodOldPrice" style="width:100%; padding:9px; border:1px solid #ddd; border-radius:6px; font-size:13px;"/>
+              </div>
+            </div>
+
+            <div class="form-grid-2">
+              <div class="form-group" style="margin-bottom: 12px;">
+                <label style="display:block; font-size:13px; font-weight:600; margin-bottom:5px;">Stock Units *</label>
+                <input type="number" id="prodStock" value="10" required style="width:100%; padding:9px; border:1px solid #ddd; border-radius:6px; font-size:13px;"/>
+              </div>
+              <div class="form-group" style="margin-bottom: 12px;">
+                <label style="display:block; font-size:13px; font-weight:600; margin-bottom:5px;">Discount Badge (e.g. 25% OFF)</label>
+                <input type="text" id="prodDiscount" placeholder="e.g. 20% OFF" style="width:100%; padding:9px; border:1px solid #ddd; border-radius:6px; font-size:13px;"/>
+              </div>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 12px;">
+              <label style="display:block; font-size:13px; font-weight:600; margin-bottom:5px;">Image URL *</label>
+              <input type="url" id="prodImage" required placeholder="https://images.unsplash.com/..." style="width:100%; padding:9px; border:1px solid #ddd; border-radius:6px; font-size:13px;"/>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 12px;">
+              <label style="display:block; font-size:13px; font-weight:600; margin-bottom:5px;">Description *</label>
+              <textarea id="prodDescription" rows="3" required style="width:100%; padding:9px; border:1px solid #ddd; border-radius:6px; font-size:13px; font-family: inherit;"></textarea>
+            </div>
+          </div>
+          <div class="modal-foot">
+            <button type="button" class="btn-secondary-admin" onclick="closeProductModal()">Cancel</button>
+            <button type="submit" class="btn-primary-admin" id="saveProdBtn">Save Product</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <p>
+        © 2024 ShopEasy Admin Console. All rights reserved. | CodeAlpha Full Stack
+      </p>
+    </footer>
+
+    <div class="toast" id="toast"></div>
+    <script src="js/auth-guard.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/admin.js"></script>
+  </body>
+</html>
