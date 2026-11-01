@@ -16,6 +16,8 @@
 **ShopEasy** is a production-ready, full-stack e-commerce web platform engineered with a decoupled REST API backend and a responsive front-end. It provides end-to-end e-commerce capabilities ranging from dynamic catalog browsing, live multi-field filtering, cart & wishlist management, coupon verification, order processing with 4-stage tracking, user profile management, customer reviews, and a full-featured centralized **Admin Dashboard**.
 
 ---
+### Deploy to Netlify 
+https://magnificent-licorice-33eebc.netlify.app/
 
 ## ✨ Key Features
 
